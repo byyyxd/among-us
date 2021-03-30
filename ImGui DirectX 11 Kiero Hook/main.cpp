@@ -1,8 +1,6 @@
 #include "includes.h"
 #include <codecvt>
 
-static auto gameModule = ( DWORD ) GetModuleHandleA( "GameAssembly.dll" );
-static auto unityModule = ( DWORD ) GetModuleHandleA( "UnityPlayer.dll" );
 std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
 
 extern LRESULT ImGui_ImplWin32_WndProcHandler( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
@@ -154,7 +152,7 @@ HRESULT __stdcall hkPresent( IDXGISwapChain *pSwapChain, UINT SyncInterval, UINT
 
 		ImGui::Spacing( );
 		ImGui::Separator( );
-		ImGui::Checkbox( "Change voting time", &votingtime );
+		ImGui::Checkbox( "Change voting time", &votingtime ); // this is a client-sided function.
 		ImGui::PushItemWidth( 160.f );
 		ImGui::SliderFloat( "Vote time", &amount, 1, 60, "%.1f" );
 
@@ -189,7 +187,7 @@ HRESULT __stdcall hkPresent( IDXGISwapChain *pSwapChain, UINT SyncInterval, UINT
 		{
 			if ( amount >= 1 )
 			{
-				wpm<float>( GetPointerAddress( Address, dwVotingTime ), amount );
+				wpm<float>( GetPointerAddress( Address, dwVotingTime ), amount ); // this is a client-sided function.
 			}
 		}
 
@@ -197,7 +195,7 @@ HRESULT __stdcall hkPresent( IDXGISwapChain *pSwapChain, UINT SyncInterval, UINT
 		{
 			if ( amountdisc >= 1 )
 			{
-				wpm<float>( GetPointerAddress( Address, dwDiscussionTime ), amount );
+				wpm<float>( GetPointerAddress( Address, dwDiscussionTime ), amount ); // this is a client-sided function.
 			}
 		}
 
